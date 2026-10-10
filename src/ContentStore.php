@@ -3,22 +3,18 @@
 declare(strict_types=1);
 
 /**
- * Minimal front-matter markdown loader for the blog.
+ * Front-matter loader (posts, categories, authors) with pinned/featured
+ * support and author resolution.
  *
  * Post file format (content/posts/<slug>.md):
  * ---
  * title: My Post
  * category: announcements
  * date: 2026-09-14
- * summary: One-line description (optional)
- * image: images/hello.jpg (optional, relative to content/)
- * ---
- * Markdown body...
- *
- * Category file format (content/categories/<slug>.md):
- * ---
- * title: Announcements
- * description: Optional
+ * author: hermes      (optional; "hermes" | "ossi" | a defined persona)
+ * pinned: true        (optional; featured on the home page)
+ * summary: ...
+ * image: images/hello.jpg
  * ---
  */
 final class ContentStore
@@ -27,7 +23,7 @@ final class ContentStore
     {
     }
 
-    /** @return list<array<string,mixed>> posts, newest date first */
+    /** @return list<array<string,mixed>> posts, pinned first, then newest date first */
     public function posts(?string $category = null): array
     {
         $posts = [];
@@ -42,7 +38,15 @@ final class ContentStore
             $posts[] = $post;
         }
 
-        usort($posts, fn ($a, $b) => strcmp((string) $b['date'], (string) $a['date']));
+        usort($posts, function ($a, $b) {
+            $pa = ($a['pinned'] ?? false) ? 1 : 0;
+            $pb = ($b['pinned'] ?? false) ? 1 : 0;
+            if ($pa !== $pb) {
+                return $pb <=> $pa;
+            }
+
+            return strcmp((string) $b['date'], (string) $a['date']);
+        });
 
         return $posts;
     }
@@ -80,12 +84,33 @@ final class ContentStore
         return is_file($path) ? $this->loadFrontMatter($path) : null;
     }
 
+    /** @return array<string,array<string,string>> key => {name, role, avatar} */
+    public function authors(): array
+    {
+        $authors = [];
+        foreach (glob($this->root . '/authors/*.md') ?: [] as $file) {
+            $a = $this->loadFrontMatter($file);
+            if ($a !== null) {
+                $authors[basename($file, '.md')] = $a + ['avatar' => 'avatars/' . basename($file) . '.png'];
+            }
+        }
+
+        return $authors;
+    }
+
+    public function author(string $key): ?array
+    {
+        $path = $this->root . '/authors/' . $key . '.md';
+
+        return is_file($path) ? ($this->loadFrontMatter($path) + ['avatar' => 'avatars/' . $key . '.png']) : null;
+    }
+
     /** Path to an image inside content/, or null if it escapes the root. */
     public function imagePath(string $relative): ?string
     {
         $full = realpath($this->root . '/' . ltrim($relative, '/'));
 
-        if ($full === false || !str_starts_with($full, realpath($this->root) . '/')) {
+        if ($full === false || !str_starts_with($full, (string) realpath($this->root) . '/')) {
             return null;
         }
 
@@ -100,11 +125,11 @@ final class ContentStore
             return null;
         }
 
-        $body = $this->body($file);
+        $meta['pinned'] = (($meta['pinned'] ?? 'false') === 'true');
 
         return array_merge($meta, [
             'slug' => basename($file, '.md'),
-            'body' => $body,
+            'body' => $this->body($file),
         ]);
     }
 

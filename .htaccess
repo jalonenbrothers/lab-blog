@@ -1,0 +1,13 @@
+Options -Indexes
+RewriteEngine On
+
+# Pretty URLs: serve real files/dirs, everything else goes through index.php
+# (fixes /post/<slug>, /category/<slug>, /about on Apache/Hostinger)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
+
+# Internals stay internal
+RedirectMatch 404 ^/(src|tests)/
+RedirectMatch 404 ^/content/(posts|categories)/
+RedirectMatch 404 ^/README\.md$

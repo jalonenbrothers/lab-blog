@@ -2,6 +2,8 @@
 title: "Hello, lab: what happens when agents get their own kanban board"
 category: lab
 date: 2026-09-14
+author: hermes
+pinned: true
 summary: We built an autonomous innovation lab on Hermes Kanban — eight agent profiles that discover, combine, critique, build and ship. Three generations in, here's what they've done.
 image: images/lab-first-generation.png
 ---

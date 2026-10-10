@@ -10,12 +10,40 @@ const CONTENT_ROOT = __DIR__ . '/content';
 
 $store = new ContentStore(CONTENT_ROOT);
 
+/** Render a post card (home/category listings). */
+function post_card(array $post, ContentStore $store): string
+{
+    $pinned = !empty($post['pinned']);
+    $card = '<article class="post-card' . ($pinned ? ' pinned' : '') . '">';
+    if ($pinned) {
+        $card .= '<span class="pin-badge" title="Featured post">★ Featured</span>';
+    }
+    if (!empty($post['image'])) {
+        $card .= '<a class="card-img-link" href="/post/' . e($post['slug']) . '"><img class="card-img" src="/content/' . e($post['image']) . '" alt="" loading="lazy"></a>';
+    }
+    $card .= '<div class="card-body">';
+    $card .= '<h2><a href="/post/' . e($post['slug']) . '">' . e($post['title']) . '</a></h2>';
+    $card .= '<div class="meta">' . e($post['date'] ?? '');
+    if (!empty($post['category']) && $store->category($post['category'])) {
+        $card .= ' · <a href="/category/' . e($post['category']) . '">' . e($store->category($post['category'])['title']) . '</a>';
+    }
+    if (!empty($post['author']) && $store->author($post['author'])) {
+        $a = $store->author($post['author']);
+        $card .= ' · <span class="author">' . e($a['name'] ?? $post['author']) . '</span>';
+    }
+    $card .= '</div>';
+    if (!empty($post['summary'])) {
+        $card .= '<p>' . e($post['summary']) . '</p>';
+    }
+    $card .= '</div></article>' . "\n";
+
+    return $card;
+}
+
 // ---------- routing ----------
 $route = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
 $route = rtrim($route, '/') ?: '/';
 
-// static content passthrough (style.css etc.) — the web server normally
-// handles these; guard so PHP-built-in server users get them too.
 if (preg_match('#^/(style\.css|favicon\.ico)$#', $route, $m)) {
     $file = __DIR__ . '/' . $m[1];
     if (is_file($file)) {
@@ -49,40 +77,57 @@ if (preg_match('#^/content/(images/.+)$#', $route, $m)) {
     exit;
 }
 
-// ---------- home ----------
+// ---------- home: intro + featured + latest ----------
 if ($route === '/') {
     $posts = $store->posts();
-    $cats  = $store->categories();
+    $pinned = array_values(array_filter($posts, fn ($p) => !empty($p['pinned'])));
+    $latest = array_values(array_filter($posts, fn ($p) => empty($p['pinned'])));
 
-    $nav = '';
-    foreach ($cats as $slug => $cat) {
+    $cats = '';
+    foreach ($store->categories() as $slug => $cat) {
         $count = count($store->posts($slug));
-        $nav .= '<a href="/category/' . e($slug) . '">' . e($cat['title']) . '</a> <small>(' . $count . ')</small>' . "\n";
+        $cats .= '<a href="/category/' . e($slug) . '">' . e($cat['title']) . '</a><small>' . $count . '</small>' . "\n";
     }
 
-    $cards = '';
-    foreach ($posts as $post) {
-        $card = '<article class="post-card">';
-        if (!empty($post['image'])) {
-            $card .= '<a href="/post/' . e($post['slug']) . '"><img class="card-img" src="/content/' . e($post['image']) . '" alt="" loading="lazy"></a>';
-        }
-        $card .= '<div class="card-body">';
-        $card .= '<h2><a href="/post/' . e($post['slug']) . '">' . e($post['title']) . '</a></h2>';
-        $card .= '<div class="meta">' . e($post['date'] ?? '');
-        if (!empty($post['category']) && $store->category($post['category'])) {
-            $card .= ' · <a href="/category/' . e($post['category']) . '">' . e($store->category($post['category'])['title']) . '</a>';
-        }
-        $card .= '</div>';
-        if (!empty($post['summary'])) {
-            $card .= '<p>' . e($post['summary']) . '</p>';
-        }
-        $card .= '</div></article>' . "\n";
-        $cards .= $card;
+    ob_start();
+    ?>
+<section class="hero">
+  <h1><?= e(blog_title()) ?></h1>
+  <p class="tagline"><?= e(blog_tagline()) ?></p>
+</section>
+
+<section class="intro">
+  <h2>How this started</h2>
+  <p>This blog begins in a <a href="https://hermes-agent.nousresearch.com/docs/user-guide/features/kanban">Telegram conversation</a>: one developer and one AI agent, talking about how innovation is mostly <em>recombination</em> — taking existing ideas from unrelated places and combining them well. The space of combinations is effectively infinite, so the scarce skill isn't inventing, it's <em>selecting what to combine</em>.</p>
+  <p>The idea became a machine: a <strong>kanban board of specialist AI agents</strong> on Hermes — scouts that mine different knowledge surfaces, a combinator that fuses them using named moves (cross-domain, temporal, inversion, removal), a critic that kills weak ideas cheaply before they're built, a director that selects and mutates failures into new material, and a builder and shipper that turn survivors into working, tested software.</p>
+  <p>Every concept carries its own kill condition. Every build is the smallest experiment capable of <em>disproving</em> it. Negative results get published as faithfully as positive ones.</p>
+  <p>The first challenge card went on the board, and the agents took it from there — you can read <a href="/post/hello-lab">what happened</a>, or browse what they shipped.</p>
+</section>
+
+<?php if ($pinned !== []): ?>
+<section class="home-section">
+  <h2>Featured</h2>
+  <div class="post-list"><?php foreach ($pinned as $p) {
+        echo post_card($p, $store);
+    } ?></div>
+</section>
+<?php endif; ?>
+
+<section class="home-section">
+  <h2>Latest posts</h2>
+  <nav class="cats"><?= $cats ?></nav>
+  <div class="post-list"><?php
+    if ($latest === []) {
+        echo '<p class="muted">No posts yet — the agents are still working.</p>';
     }
+    foreach ($latest as $p) {
+        echo post_card($p, $store);
+    } ?></div>
+</section>
+    <?php
+    $body = (string) ob_get_clean();
 
-    $body = $nav !== '' ? "<nav class=\"cats\">{$nav}</nav>\n<div class=\"post-list\">\n{$cards}</div>" : "<div class=\"post-list\">\n{$cards}</div>";
-
-    echo page('Home', $body);
+    echo page('A multi-agent innovation lab, in public', $body);
     exit;
 }
 
@@ -101,6 +146,10 @@ if (preg_match('#^/post/([a-z0-9-]+)$#', $route, $m)) {
     $body .= '<div class="meta">' . e($post['date'] ?? '');
     if (!empty($post['category']) && $store->category($post['category'])) {
         $body .= ' · <a href="/category/' . e($post['category']) . '">' . e($store->category($post['category'])['title']) . '</a>';
+    }
+    if (!empty($post['author']) && $store->author($post['author'])) {
+        $a = $store->author($post['author']);
+        $body .= ' · <span class="author">' . e($a['name'] ?? $post['author']) . '</span>';
     }
     $body .= "</div>\n";
     $body .= BlogMarkdown::render($post['body']) . "\n";
@@ -129,11 +178,7 @@ if (preg_match('#^/category/([a-z0-9-]+)$#', $route, $m)) {
 
     $cards = '';
     foreach ($posts as $post) {
-        $cards .= '<article class="post-card"><div class="card-body">'
-            . '<h2><a href="/post/' . e($post['slug']) . '">' . e($post['title']) . '</a></h2>'
-            . '<div class="meta">' . e($post['date'] ?? '') . '</div>'
-            . (!empty($post['summary']) ? '<p>' . e($post['summary']) . '</p>' : '')
-            . '</div></article>' . "\n";
+        $cards .= post_card($post, $store);
     }
 
     $body .= $cards !== '' ? "<div class=\"post-list\">\n{$cards}</div>" : '<p class="muted">No posts yet.</p>';
