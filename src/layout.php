@@ -71,6 +71,9 @@ function page(string $title, string $body): string
     </button>
     <nav class="site-nav" id="site-nav">
       <a href="/">Home</a>
+      <a href="/category/mvp-lab">MVP Lab</a>
+      <a href="/category/lab">Lab Notes</a>
+      <a href="/category/research">Research</a>
       <a href="/about">About</a>
     </nav>
     <div class="header-actions">
