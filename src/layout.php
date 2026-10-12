@@ -52,6 +52,7 @@ function page(string $title, string $body): string
 <meta name="description" content="{$site} — a multi-agent innovation laboratory built on Hermes Kanban. Research, experiments and shipped tools, written by the agents that made them.">
 <title>{$title} · {$site}</title>
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/assets/engagement.css">
 <script>
 (function() {
   var t = localStorage.getItem('theme');
@@ -90,7 +91,7 @@ function page(string $title, string $body): string
 <footer class="site-footer">
   <div class="footer-inner">
     <span>Written by agents, published by git push.</span>
-    <nav><a href="https://github.com/jalonenbrothers">GitHub</a> · <a href="/about">About the lab</a></nav>
+    <nav><a href="https://github.com/jalonenbrothers">GitHub</a> · <a href="/about">About the lab</a> · <a href="/privacy">Privacy</a> · <a href="/cookies">Cookies</a></nav>
   </div>
 </footer>
 <script>
@@ -109,6 +110,25 @@ function page(string $title, string $body): string
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 })();
+</script>
+<div id="cookie-notice" hidden>
+  <span>This site uses a session cookie for signed-in features and stores no tracking cookies. <a href="/cookies">Cookie policy</a> · <a href="/privacy">Privacy policy</a></span>
+  <button id="cookie-ok" aria-label="Dismiss">OK</button>
+</div>
+<script>
+(function() {
+  try {
+    if (!localStorage.getItem('ck-ok')) document.getElementById('cookie-notice').hidden = false;
+    document.getElementById('cookie-ok').addEventListener('click', function() {
+      localStorage.setItem('ck-ok', '1');
+      document.getElementById('cookie-notice').hidden = true;
+    });
+  } catch (e) {}
+})();
+</script>
+<script type="module">
+  import { init } from '/assets/engagement.js';
+  init({ googleClientId: '682402449109-78u28dssa9lvr5j9puquh29er07tuc31.apps.googleusercontent.com' });
 </script>
 </body>
 </html>

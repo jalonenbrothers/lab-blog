@@ -1,0 +1,21 @@
+/* Engagement Kit styles — neutral, inherits blog fonts. */
+.eng-zone { margin-top: 2.25rem; border-top: 1px solid var(--line, #e4e2dc); padding-top: 1.25rem; }
+.eng-spark { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem; }
+.eng-spark-btn { cursor: pointer; font: inherit; border: 1px solid var(--line, #ccc); background: var(--card, #fff); border-radius: 999px; padding: 0.4rem 1rem; color: var(--fg, #232320); }
+.eng-spark-btn:hover { border-color: #d4a017; color: #b48a1e; }
+.eng-spark-btn.on { background: #fdf6e3; border-color: #d4a017; color: #b48a1e; }
+.eng-count { color: var(--muted, #71706a); font-size: 0.9rem; }
+.eng-h { font-size: 1rem; margin: 0 0 0.75rem; }
+.eng-comments { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1rem; }
+.eng-comment { background: var(--card, #fff); border: 1px solid var(--line, #e4e2dc); border-radius: 8px; padding: 0.65rem 0.9rem; }
+.eng-c-meta { color: var(--muted, #71706a); font-size: 0.8rem; margin-bottom: 0.25rem; }
+.eng-c-body { white-space: pre-wrap; }
+.eng-empty { color: var(--muted, #71706a); font-size: 0.9rem; }
+.eng-form { display: flex; flex-direction: column; gap: 0.5rem; max-width: 560px; }
+.eng-ta { font: inherit; padding: 0.6rem 0.75rem; border: 1px solid var(--line, #ccc); border-radius: 8px; min-height: 84px; resize: vertical; background: var(--card, #fff); color: var(--fg, #232320); }
+.eng-ta:focus { outline: 2px solid #d4a017; outline-offset: -1px; border-color: #d4a017; }
+.eng-submit { align-self: flex-start; cursor: pointer; font: inherit; border: 1px solid var(--line, #ccc); background: var(--card, #fff); border-radius: 8px; padding: 0.45rem 1.2rem; }
+.eng-submit:hover { border-color: #d4a017; }
+.eng-hint { font-size: 0.82rem; color: var(--muted, #71706a); min-height: 1em; }
+.eng-login-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.eng-login-hint { color: var(--muted, #71706a); font-size: 0.9rem; }

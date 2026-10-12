@@ -153,7 +153,9 @@ if (preg_match('#^/post/([a-z0-9-]+)$#', $route, $m)) {
     }
     $body .= "</div>\n";
     $body .= BlogMarkdown::render($post['body']) . "\n";
-    $body .= "</article>\n<p><a href=\"/\">← All posts</a></p>";
+    $body .= "</article>\n";
+    $body .= '<div class="eng-zone" data-post="' . e($post['slug']) . '"></div>' . "\n";
+    $body .= "<p><a href=\"/\">← All posts</a></p>";
 
     echo page($post['title'] ?? $m[1], $body);
     exit;
@@ -185,6 +187,15 @@ if (preg_match('#^/category/([a-z0-9-]+)$#', $route, $m)) {
     $body .= "\n<p><a href=\"/\">← All posts</a></p>";
 
     echo page($cat['title'], $body);
+    exit;
+}
+
+// ---------- privacy / cookies ----------
+if (preg_match('#^/(privacy|cookies)$#', $route, $m)) {
+    $file = CONTENT_ROOT . '/' . ($m[1] === 'privacy' ? 'privacy' : 'cookies') . '.md';
+    $md = is_file($file) ? (string) file_get_contents($file) : 'Policy page missing.';
+    $title = $m[1] === 'privacy' ? 'Privacy Policy' : 'Cookie Policy';
+    echo page($title, '<article class="post policy">' . BlogMarkdown::render($md) . '</article>');
     exit;
 }
 
