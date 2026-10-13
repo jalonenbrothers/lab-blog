@@ -144,6 +144,9 @@ try {
         jout(['error' => 'login required'], 401);
     }
     throw $e;
+} catch (PDOException $e) {
+    // Operator-actionable DB errors: report the real message (never secrets — PDO messages here are schema-level)
+    jout(['error' => 'database: ' . $e->getMessage()], 500);
 }
 
 /** Display name for the session user. */
