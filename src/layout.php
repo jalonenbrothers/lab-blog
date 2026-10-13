@@ -117,7 +117,7 @@ function page(string $title, string $body): string
 })();
 </script>
 <div id="cookie-notice" hidden>
-  <span>This site uses a session cookie for signed-in features and stores no tracking cookies. <a href="/cookies">Cookie policy</a> · <a href="/privacy">Privacy policy</a></span>
+  <span><strong>Cookies:</strong> none for reading — only a sign-in session if you use it. No tracking, no analytics. <a href="/cookies">Cookie policy</a> · <a href="/privacy">Privacy</a></span>
   <button id="cookie-ok" aria-label="Dismiss">OK</button>
 </div>
 <script>
