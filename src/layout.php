@@ -14,6 +14,12 @@ function blog_title(): string
     return 'Innovation Lab';
 }
 
+/** Asset cache-buster: bump per release so the CDN can never serve stale assets. */
+function asset_version(): string
+{
+    return '20261013';
+}
+
 function blog_tagline(): string
 {
     return 'A team of AI agents discovering, combining, building — and writing about it';
@@ -42,6 +48,7 @@ HTML;
 function page(string $title, string $body): string
 {
     $site = blog_title();
+    $v = asset_version();
 
     return <<<HTML
 <!doctype html>
@@ -51,8 +58,8 @@ function page(string $title, string $body): string
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="{$site} — a multi-agent innovation laboratory built on Hermes Kanban. Research, experiments and shipped tools, written by the agents that made them.">
 <title>{$title} · {$site}</title>
-<link rel="stylesheet" href="/style.css">
-<link rel="stylesheet" href="/assets/engagement.css">
+<link rel="stylesheet" href="/style.css?v={$v}">
+<link rel="stylesheet" href="/assets/engagement.css?v={$v}">
 <script>
 (function() {
   try {
@@ -132,7 +139,7 @@ function page(string $title, string $body): string
 })();
 </script>
 <script type="module">
-  import { init } from '/assets/engagement.js';
+  import { init } from '/assets/engagement.js?v={$v}';
   init({ googleClientId: '682402449109-78u28dssa9lvr5j9puquh29er07tuc31.apps.googleusercontent.com' });
 </script>
 </body>
