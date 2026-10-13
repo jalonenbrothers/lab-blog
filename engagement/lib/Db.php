@@ -13,11 +13,7 @@ final class Db
             return self::$pdo;
         }
 
-        $file = $configDir . '/config.php';
-        if (!is_file($file)) {
-            http_response_code(500);
-            exit('engagement: config.php missing — copy config.example.php');
-        }
+        $file = self::configFile($configDir);
 
         $cfg = require $file;
         $db  = $cfg['db'];
@@ -45,13 +41,39 @@ final class Db
 
     public static function cfg(string $configDir): array
     {
-        $file = $configDir . '/config.php';
-        if (!is_file($file)) {
-            http_response_code(500);
-            exit('engagement: config.php missing — copy config.example.php');
+        return require self::configFile($configDir);
+    }
+
+    /**
+     * Config resolution order:
+     *  1. engagement/config.php            (in-repo; survives only if deploy keeps untracked files)
+     *  2. ../engagement-config.php        (one level ABOVE the web root — the deploy-proof spot
+     *                                      on Hostinger: /home/uXXXX/engagement-config.php)
+     *  3. ENG_CONFIG_PATH env var         (explicit override for exotic layouts)
+     */
+    public static function configFile(string $configDir): string
+    {
+        $candidates = [
+            $configDir . '/config.php',
+            dirname($configDir, 2) . '/engagement-config.php',
+        ];
+
+        $env = getenv('ENG_CONFIG_PATH');
+        if ($env !== false && $env !== '') {
+            array_unshift($candidates, $env);
         }
 
-        return require $file;
+        foreach ($candidates as $file) {
+            if (is_file($file)) {
+                return $file;
+            }
+        }
+
+        http_response_code(500);
+        header('Content-Type: text/plain');
+        exit("engagement: no config found — place config at one of:
+  " . implode("
+  ", $candidates));
     }
 
     public static function table(array $cfg, string $name): string

@@ -1,1 +1,5 @@
 .git/
+engagement/config.php
+engagement/config.local.php
+data/
+*.log
