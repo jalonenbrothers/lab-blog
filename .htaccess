@@ -1,16 +1,16 @@
 Options -Indexes
 RewriteEngine On
 
+# Engagement Kit: pretty API endpoint (must come before the catch-all)
+RewriteRule ^engagement/api/?$ engagement/api.php [QSA,L]
+
+# Internals stay internal
+RewriteRule ^engagement/(lib|config\.php|config\.example\.php) - [R=404,L]
+RewriteRule ^(src|tests)/ - [R=404,L]
+RewriteRule ^content/(posts|categories|authors)/ - [R=404,L]
+RewriteRule ^README\.md$ - [R=404,L]
+
 # Pretty URLs: serve real files/dirs, everything else goes through index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.php [QSA,L]
-
-# Engagement Kit: api endpoint + internals blocked
-RewriteRule ^engagement/api$ engagement/api.php [QSA,L]
-RedirectMatch 404 ^/engagement/(lib|config\.php|config\.example\.php)
-
-# Internals stay internal
-RedirectMatch 404 ^/(src|tests)/
-RedirectMatch 404 ^/content/(posts|categories|authors)/
-RedirectMatch 404 ^/README\.md$

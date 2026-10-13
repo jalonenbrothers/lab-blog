@@ -49,8 +49,7 @@ a:hover { color: var(--accent-dark); text-underline-offset: 2px; text-decoration
   position: sticky;
   top: 0;
   z-index: 20;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(8px);
+  background: var(--bg); /* solid fallback (color-mix removed for wide browser support) */
   border-bottom: 1px solid var(--line);
 }
 .header-inner {
@@ -175,7 +174,7 @@ main {
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
 }
 .post-card:hover {
-  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+  border-color: var(--accent);
   transform: translateY(-1px);
   box-shadow: var(--shadow);
 }
@@ -192,14 +191,14 @@ main {
   top: 0.9rem;
   right: 0.9rem;
   z-index: 2;
-  background: color-mix(in srgb, var(--pin) 14%, var(--card));
+  background: #fdf6e3;
   color: var(--pin);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   padding: 0.28rem 0.6rem;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--pin) 35%, transparent);
+  border: 1px solid var(--pin);
 }
 
 /* ---------- single post ---------- */

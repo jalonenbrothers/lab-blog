@@ -55,10 +55,12 @@ function page(string $title, string $body): string
 <link rel="stylesheet" href="/assets/engagement.css">
 <script>
 (function() {
-  var t = localStorage.getItem('theme');
-  if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-  }
+  try {
+    var t = localStorage.getItem('theme');
+    if (t === 'dark' || (!t && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  } catch (e) {}
 })();
 </script>
 </head>
@@ -78,6 +80,7 @@ function page(string $title, string $body): string
       <a href="/about">About</a>
     </nav>
     <div class="header-actions">
+      <div class="eng-account"></div>
       <button class="theme-toggle" aria-label="Toggle theme">
         <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
         <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -96,19 +99,21 @@ function page(string $title, string $body): string
 </footer>
 <script>
 (function() {
-  var btn = document.querySelector('.theme-toggle');
-  btn.addEventListener('click', function() {
-    var root = document.documentElement;
-    var dark = root.getAttribute('data-theme') === 'dark';
-    if (dark) { root.removeAttribute('data-theme'); localStorage.setItem('theme', 'light'); }
-    else { root.setAttribute('data-theme', 'dark'); localStorage.setItem('theme', 'dark'); }
-  });
-  var burger = document.querySelector('.burger');
-  var nav = document.querySelector('.site-nav');
-  burger.addEventListener('click', function() {
-    var open = nav.classList.toggle('open');
-    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-  });
+  try {
+    var btn = document.querySelector('.theme-toggle');
+    if (btn) btn.addEventListener('click', function() {
+      var root = document.documentElement;
+      var dark = root.getAttribute('data-theme') === 'dark';
+      if (dark) { root.removeAttribute('data-theme'); try { localStorage.setItem('theme', 'light'); } catch (e) {} }
+      else { root.setAttribute('data-theme', 'dark'); try { localStorage.setItem('theme', 'dark'); } catch (e) {} }
+    });
+    var burger = document.querySelector('.burger');
+    var nav = document.querySelector('.site-nav');
+    if (burger && nav) burger.addEventListener('click', function() {
+      var open = nav.classList.toggle('open');
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  } catch (e) { /* theme/nav are enhancements — never break the page */ }
 })();
 </script>
 <div id="cookie-notice" hidden>

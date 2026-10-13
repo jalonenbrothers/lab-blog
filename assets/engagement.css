@@ -19,3 +19,8 @@
 .eng-hint { font-size: 0.82rem; color: var(--muted, #71706a); min-height: 1em; }
 .eng-login-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
 .eng-login-hint { color: var(--muted, #71706a); font-size: 0.9rem; }
+/* header account island */
+.eng-account { display: flex; align-items: center; gap: 0.6rem; min-height: 34px; }
+.eng-user-name { color: var(--muted, #71706a); font-size: 0.85rem; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.eng-logout { cursor: pointer; font: inherit; font-size: 0.8rem; border: 1px solid var(--line, #ccc); background: var(--card, #fff); border-radius: 6px; padding: 0.3rem 0.7rem; color: var(--muted, #71706a); }
+.eng-logout:hover { border-color: #b04040; color: #b04040; }

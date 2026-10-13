@@ -1,6 +1,7 @@
 /* Engagement Kit — vanilla ES module.
  * init({ googleClientId }) — finds .eng-zone divs and renders:
  * spark count + toggle, login island, comment form / list.
+ * Also renders a header account island (.eng-account) if present.
  * Non-intrusive: logged-out users see a small "login to spark" hint only
  * inside the zone; nothing ever blocks reading.
  */
@@ -15,8 +16,11 @@ async function j(action, opts = {}) {
   return res.json();
 }
 
-async function post(action, body) {
-  return j(action, { fetch: { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) } });
+async function post(action, body, postId) {
+  return j(action, {
+    post: postId,
+    fetch: { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) },
+  });
 }
 
 function el(tag, cls, text) {
@@ -46,7 +50,7 @@ async function renderZone(zone, cfg, state) {
 
   btn.addEventListener('click', async () => {
     if (!state.user) { renderLogin(zone, cfg, state); return; }
-    const r = await post('spark', {}, zone.dataset.post);
+    const r = await post('spark', {}, postId);
     if (r.error) return;
     state.sparked = r.sparked; state.count = r.count;
     btn.textContent = r.sparked ? '⚡ Sparked' : '⚡ Spark';
@@ -84,7 +88,7 @@ async function renderZone(zone, cfg, state) {
     form.addEventListener('submit', async (ev) => {
       ev.preventDefault();
       hint.textContent = '';
-      const r = await post('comment', { body: ta.value });
+      const r = await post('comment', { body: ta.value }, postId);
       if (r.error) { hint.textContent = r.error; return; }
       ta.value = '';
       hint.textContent = r.masked
@@ -92,13 +96,20 @@ async function renderZone(zone, cfg, state) {
         : 'Sent for moderation.';
     });
   } else {
-    const loginRow = el('div', 'eng-login-row');
-    loginRow.appendChild(el('span', 'eng-login-hint', 'Sign in with Google to spark or comment'));
-    const gbtn = el('div', 'eng-gbtn');
-    loginRow.appendChild(gbtn);
-    zone.appendChild(loginRow);
-    mountGoogle(zone, cfg, gbtn);
+    renderLogin(zone, cfg, state);
   }
+}
+
+function renderLogin(zone, cfg, state) {
+  const existing = zone.querySelector('.eng-login-row');
+  if (existing) existing.remove();
+
+  const loginRow = el('div', 'eng-login-row');
+  loginRow.appendChild(el('span', 'eng-login-hint', 'Sign in with Google to spark or comment'));
+  const gbtn = el('div', 'eng-gbtn');
+  loginRow.appendChild(gbtn);
+  zone.appendChild(loginRow);
+  mountGoogle(zone, cfg, gbtn);
 }
 
 function mountGoogle(zone, cfg, gbtn) {
@@ -115,10 +126,36 @@ function mountGoogle(zone, cfg, gbtn) {
       const state = await j('state', { post: postId });
       state.user = r.user;
       renderZone(zone, cfg, state);
+      renderAccount(cfg);
     },
   });
   google.accounts.id.renderButton(gbtn, { theme: 'outline', size: 'small', text: 'signin' });
   // non-intrusive: NEVER call google.accounts.id.prompt() — no popups.
+}
+
+/** Header account island: signed-in name + logout, or nothing. */
+async function renderAccount(cfg) {
+  const holder = document.querySelector('.eng-account');
+  if (!holder) return;
+
+  // reuse any zone's state if present; otherwise ask whoami-less state via first zone
+  let user = null;
+  const zone = document.querySelector('.eng-zone');
+  if (zone && zone.dataset.post) {
+    const s = await j('state', { post: zone.dataset.post });
+    user = s.user;
+  }
+
+  holder.textContent = '';
+  if (user) {
+    const name = el('span', 'eng-user-name', user.name || 'Signed in');
+    const out = el('button', 'eng-logout', 'Sign out');
+    out.addEventListener('click', async () => {
+      await post('logout', {});
+      location.reload();
+    });
+    holder.append(name, out);
+  }
 }
 
 export async function init(cfg) {
@@ -139,4 +176,6 @@ export async function init(cfg) {
     const state = await j('state', { post: postId });
     renderZone(zone, cfg, state);
   }
+
+  renderAccount(cfg);
 }
