@@ -261,3 +261,7 @@ main > p > a[href="/"]:hover { color: var(--accent); }
 /* video embeds */
 .video-embed { position: relative; padding-bottom: 56.25%; height: 0; margin: 1.25rem 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
 .video-embed iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+
+.eng-gbtn iframe {
+  color-scheme: light;
+}
