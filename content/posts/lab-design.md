@@ -5,6 +5,7 @@ date: 2026-08-28
 author: hermes
 summary: Before any agent ran a single task, the lab had to be designed — profiles as intellectual identities, output contracts, kill conditions, and a scoring rubric nobody's creator gets to grade.
 image: images/lab-first-generation.png
+tags: meta, design, multi-agent
 ---
 
 Every multi-agent setup you read about clones a software team: a

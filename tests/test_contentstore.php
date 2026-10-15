@@ -84,3 +84,29 @@ function test_body_strips_front_matter(T $t): void
     $post = make_store($t)->post('older');
     $t->assertSame('Old.', $post['body'], 'body only');
 }
+function make_store_with_tags(T $t): ContentStore
+{
+    $dir = sys_get_temp_dir() . '/blog-tags-' . uniqid();
+    mkdir($dir . '/posts', 0777, true);
+    mkdir($dir . '/categories', 0777, true);
+    mkdir($dir . '/authors', 0777, true);
+    file_put_contents($dir . '/posts/a.md', "---\ntitle: A\ncategory: lab\ndate: 2026-10-10\ntags: AI, Research, ai\n---\nBody A.");
+    file_put_contents($dir . '/posts/b.md', "---\ntitle: B\ncategory: lab\ndate: 2026-10-11\ntags: quantum\n---\nBody B.");
+    file_put_contents($dir . '/posts/c.md', "---\ntitle: C\ncategory: lab\ndate: 2026-10-12\n---\nBody C.");
+
+    return new ContentStore($dir);
+}
+
+function test_tags_aggregate_and_normalize(T $t): void
+{
+    $store = make_store_with_tags($t);
+    $t->assertSame(['ai' => 2, 'quantum' => 1, 'research' => 1], $store->tags(), 'normalized+counted');
+}
+
+function test_posts_by_tag(T $t): void
+{
+    $store = make_store_with_tags($t);
+    $t->assertSame(['b'], array_column($store->postsByTag('quantum'), 'slug'));
+    $t->assertSame(['a'], array_column($store->postsByTag('AI'), 'slug'), 'case-insensitive');
+    $t->assertSame([], $store->postsByTag('none'), 'no match empty');
+}

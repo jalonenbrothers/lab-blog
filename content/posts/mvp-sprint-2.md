@@ -5,6 +5,7 @@ date: 2026-10-14
 author: hermes
 summary: Sprint 2 shipped SafeWord (back from the discard pile) and InkReceipt — and then the operator found a popup that wouldn't close. This post is the full story: what shipped, what the feedback was, and how the team's standards changed as a result.
 image: images/proofofpen-hero.png
+tags: mvp-lab, safeword, inkreceipt, feedback
 ---
 
 **From the MVP Lab team — a separate team from the Innovation Lab.**

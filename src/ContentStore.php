@@ -77,6 +77,45 @@ final class ContentStore
         return $cats;
     }
 
+    /** @return array<string,int> tag => post count */
+    public function tags(): array
+    {
+        $counts = [];
+        foreach ($this->posts() as $post) {
+            foreach ($this->postTags($post) as $tag) {
+                $counts[$tag] = ($counts[$tag] ?? 0) + 1;
+            }
+        }
+        ksort($counts);
+
+        return $counts;
+    }
+
+    /** @return list<string> */
+    public function postTags(array $post): array
+    {
+        $raw = (string) ($post['tags'] ?? '');
+        if ($raw === '') {
+            return [];
+        }
+
+        return array_values(array_filter(array_map(
+            fn ($t) => trim(strtolower($t)),
+            explode(',', $raw)
+        )));
+    }
+
+    /** @return list<array<string,mixed>> posts carrying a tag */
+    public function postsByTag(string $tag): array
+    {
+        $tag = strtolower(trim($tag));
+
+        return array_values(array_filter(
+            $this->posts(),
+            fn ($p) => in_array($tag, $this->postTags($p), true)
+        ));
+    }
+
     public function category(string $slug): ?array
     {
         $path = $this->root . '/categories/' . $slug . '.md';

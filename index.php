@@ -35,6 +35,13 @@ function post_card(array $post, ContentStore $store): string
     if (!empty($post['summary'])) {
         $card .= '<p>' . e($post['summary']) . '</p>';
     }
+    $tags = $store->postTags($post);
+    if ($tags !== []) {
+        $card .= '<div class="tags">' . implode('', array_map(
+            fn ($t) => '<a class="tag" href="/tag/' . e($t) . '">' . e($t) . '</a>',
+            $tags
+        )) . '</div>';
+    }
     $card .= '</div></article>' . "\n";
 
     return $card;
@@ -91,9 +98,11 @@ if ($route === '/') {
 
     ob_start();
     ?>
-<section class="hero">
-  <h1><?= e(blog_title()) ?></h1>
-  <p class="tagline"><?= e(blog_tagline()) ?></p>
+<section class="hero hero-full">
+  <div class="hero-inner">
+    <h1><?= e(blog_title()) ?></h1>
+    <p class="tagline"><?= e(blog_tagline()) ?></p>
+  </div>
 </section>
 
 <section class="intro">
@@ -142,6 +151,9 @@ if (preg_match('#^/post/([a-z0-9-]+)$#', $route, $m)) {
     }
 
     $body = '<article class="post">' . "\n";
+    if (!empty($post['image'])) {
+        $body .= '<div class="post-hero"><img src="/content/' . e($post['image']) . '" alt=""></div>' . "\n";
+    }
     $body .= '<h1>' . e($post['title'] ?? $m[1]) . '</h1>' . "\n";
     $body .= '<div class="meta">' . e($post['date'] ?? '');
     if (!empty($post['category']) && $store->category($post['category'])) {
@@ -152,6 +164,10 @@ if (preg_match('#^/post/([a-z0-9-]+)$#', $route, $m)) {
         $body .= ' · <span class="author">' . e($a['name'] ?? $post['author']) . '</span>';
     }
     $body .= "</div>\n";
+    foreach ($store->postTags($post) as $tag) {
+        $body .= '<a class="tag" href="/tag/' . e($tag) . '">' . e($tag) . '</a>' . " ";
+    }
+    $body = rtrim($body) . "\n";
     $body .= BlogMarkdown::render($post['body']) . "\n";
     $body .= "</article>\n";
     $body .= '<div class="eng-zone" data-post="' . e($post['slug']) . '"></div>' . "\n";
@@ -196,6 +212,30 @@ if (preg_match('#^/(privacy|cookies)$#', $route, $m)) {
     $md = is_file($file) ? (string) file_get_contents($file) : 'Policy page missing.';
     $title = $m[1] === 'privacy' ? 'Privacy Policy' : 'Cookie Policy';
     echo page($title, '<article class="post policy">' . BlogMarkdown::render($md) . '</article>');
+    exit;
+}
+
+// ---------- tag ----------
+if (preg_match('#^/tag/([a-z0-9-]+)$#', $route, $m)) {
+    $posts = $store->postsByTag($m[1]);
+
+    if ($posts === []) {
+        http_response_code(404);
+        echo page('Not found', '<h1>404</h1><p>No posts with this tag.</p>');
+        exit;
+    }
+
+    $cards = '';
+    foreach ($posts as $post) {
+        $cards .= post_card($post, $store);
+    }
+
+    $body = '<h1>#' . e($m[1]) . '</h1>' . "\n"
+        . '<p class="muted">' . count($posts) . ' post(s)</p>' . "\n"
+        . "<div class=\"post-list\">\n{$cards}</div>\n"
+        . '<p><a href="/">← All posts</a></p>';
+
+    echo page('#' . $m[1], $body);
     exit;
 }
 

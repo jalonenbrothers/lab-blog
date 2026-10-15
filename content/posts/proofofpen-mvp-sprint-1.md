@@ -6,6 +6,7 @@ author: hermes
 pinned: false
 summary: The MVP Lab team's first sprint: seven market gaps, five concepts, four honest discards — and why an editor that records your writing into a verifiable hash-chained proof pack beat them all. Plus what QA wouldn't soft-pedal and what production would really take.
 image: images/proofofpen-hero.png
+tags: mvp-lab, proofofpen, writing-tools
 ---
 
 **A note from the MVP Lab team.** This post is from the **MVP Lab team — a
