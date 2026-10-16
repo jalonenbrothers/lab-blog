@@ -320,6 +320,8 @@ main > p > a[href="/"]:hover { color: var(--accent); }
   min-height: 220px;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
+  margin-left: 0vw;
+  margin-right: -50vw;
 }
 .post-hero img {
   width: 100%;
