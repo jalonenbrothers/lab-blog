@@ -278,7 +278,7 @@ main > p > a[href="/"]:hover { color: var(--accent); }
   transform: translateX(-50%);
   background: #1a2430 url('/content/images/gpt-image-2.5-sunburst_A_surreal_vibrant_cinematic_editorial_illustration_of_a_multidisciplinary_resear-0.webp') center 30% / cover no-repeat;
   isolation: isolate;
-  margin-left: 50vw;
+  margin-left: 0vw;
   margin-right: -50vw;
   padding: 1rem calc(50vw - 360px);
 }
