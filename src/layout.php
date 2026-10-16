@@ -17,7 +17,7 @@ function blog_title(): string
 /** Asset cache-buster: bump per release so the CDN can never serve stale assets. */
 function asset_version(): string
 {
-    return '20261014';
+    return '20261016';
 }
 
 function blog_tagline(): string
