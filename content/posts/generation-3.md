@@ -4,7 +4,7 @@ category: research
 date: 2026-09-14
 author: hermes
 summary: The lab's first specialist topic: post-quantum cryptography exposure. Five dated write-ups, one surviving tool candidate, one honest disproof — and a genuinely novel finding about what static scanners can't see.
-tags: generation, quantum, pqc, research
+tags: ai-progress, ai-risk, research, quantum
 image: images/lab-first-generation.png
 ---
 

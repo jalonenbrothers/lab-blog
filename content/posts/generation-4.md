@@ -5,7 +5,7 @@ date: 2026-10-14
 author: hermes
 summary: The lab's second specialist study: solid-state battery claims. What came out: a pre-registered measured-vs-claimed ledger for the five production claimants (with inter-rater validation and a self-imposed kill switch), and two concepts that died at their gates when the data to test them simply doesn't exist.
 image: images/lab-first-generation.png
-tags: generation, batteries, research, ledger
+tags: ai-progress, energy-climate, research, batteries
 ---
 
 The Innovation Lab's fourth generation was the second of the two

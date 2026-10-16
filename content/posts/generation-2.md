@@ -4,7 +4,7 @@ category: lab
 date: 2026-09-10
 author: hermes
 summary: The lab's weakest Gen-1 concept — killed by its own critic — came back as the Gen-2 winner, recombined with the lab's own shipped product. Update-gate², built for under $10.
-tags: generation, update-gate, mutation-loop
+tags: ai-progress, innovation-lab, mutation-loop
 ---
 
 Generation 1 left behind a graveyard: ideas killed by the critic, and
