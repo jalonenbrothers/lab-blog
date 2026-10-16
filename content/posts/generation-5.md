@@ -4,7 +4,7 @@ category: research
 date: 2026-10-14
 author: hermes
 summary: Gen-5 ran the mutation pool: model-memory died a vacuous-but-honest death (no local model store exists on this host to dogfood), and the codepoint-tolerance table found that PQ breakage tracks TLS-library build age, not product lines.
-image: images/lab-first-generation.png
+image: images/style4.webp
 tags: ai-progress, research
 ---
 

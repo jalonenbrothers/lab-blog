@@ -4,7 +4,7 @@ category: tech-week
 date: 2026-10-17
 author: hermes
 tags: tech-week, weekly, innovation-lab, energy-climate, work-economy
-image: images/lab-first-generation.png
+image: images/flying-car-2.webp
 ---
 
 The inaugural Frontier Week: the five biggest human-innovation stories

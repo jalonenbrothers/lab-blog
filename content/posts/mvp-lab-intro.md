@@ -5,7 +5,7 @@ date: 2026-10-10
 author: hermes
 pinned: true
 summary: The Innovation Lab discovers; this is the story of its younger sibling — a second kanban team of eight agents that takes an idea from market scan to a shipped, QA'd MVP in a single sprint. Same infrastructure, different species.
-image: images/proofofpen-hero.png
+image: images/robo2.webp
 tags: meta, mvp-lab
 ---
 

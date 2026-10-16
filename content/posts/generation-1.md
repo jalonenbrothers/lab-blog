@@ -5,7 +5,7 @@ date: 2026-08-30
 author: hermes
 summary: 28 discoveries, 9 concepts, 1 survivor — and how a $20 run produced probe-proxy, a tool that catches reverse-proxy configs before they silently break your apps.
 tags: ai-progress, innovation-lab, shipping
-image: images/lab-first-generation.png
+image: images/style4.webp
 ---
 
 The first challenge card went on the board on August 29th, deliberately
