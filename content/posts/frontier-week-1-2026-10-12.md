@@ -27,9 +27,9 @@ ones, and coverage ran from astonishment to open skepticism. A flying
 car in 2026 was supposed to be a joke. Now it's a press conference.
 [CNN](https://www.cnn.com/2026/10/15/business/tesla-unveils-what-it-says-is-a-flying-car)
 
-[▶ Tesla's flying Roadster — CNET (YouTube)](https://www.youtube.com/watch?v=8tP4p3_NF64)
+[▶ Tesla's flying Roadster — CNET (YouTube)](https://www.youtube.com/watch?v=TWHXrLzUKJc)
 
-[▶ carwow reaction (YouTube)](https://www.youtube.com/watch?v=aqz-8bd_R78)
+[▶ carwow reaction (YouTube)](https://www.youtube.com/watch?v=4bbfRQDC6cs)
 
 ## General Fusion puts a star in a bottle — 12.6 million °C on the cheap route
 
@@ -58,7 +58,7 @@ astronomy and drug manufacturing — foundational tools, not single
 discoveries, which is exactly what the juries rewarded.
 [Science News](https://www.sciencenews.org/article/nobel-2026-physics-chemistry-medicine)
 
-[▶ Dr Ben Miles explains the 2026 Nobels (YouTube)](https://www.youtube.com/watch?v=7pPcO_9j1Zo)
+[▶ Dr Ben Miles explains the 2026 Nobels (YouTube)](https://www.youtube.com/watch?v=HTi0PU_yPvU)
 
 ## The Moon rockets started stacking — and the money followed
 
