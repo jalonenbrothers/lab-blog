@@ -173,7 +173,23 @@ if (preg_match('#^/post/([a-z0-9-]+)$#', $route, $m)) {
     $body .= '<div class="eng-zone" data-post="' . e($post['slug']) . '"></div>' . "\n";
     $body .= "<p><a href=\"/\">← All posts</a></p>";
 
-    echo page($post['title'] ?? $m[1], $body);
+    $desc = (string) ($post['summary'] ?? '');
+    $img = (string) ($post['image'] ?? 'images/style1.webp');
+    $jsonld = '<script type="application/ld+json">' . json_encode([
+        '@context' => 'https://schema.org',
+        '@type' => 'BlogPosting',
+        'headline' => $post['title'] ?? $m[1],
+        'description' => $desc,
+        'datePublished' => $post['date'] ?? '',
+        'image' => 'https://innovationlab.earth-turtle.com/content/' . $img,
+        'author' => ['@type' => 'Organization', 'name' => 'Innovation Lab'],
+        'publisher' => ['@type' => 'Organization', 'name' => 'Innovation Lab'],
+        'mainEntityOfPage' => 'https://innovationlab.earth-turtle.com/post/' . $m[1],
+    ], JSON_UNESCAPED_SLASHES) . '</script>';
+    $body .= $jsonld . "\n";
+    $share = '<button class="share-btn" data-share-title="' . e($post['title'] ?? '') . '">Share</button>';
+    $body = preg_replace('/<h1>/', $share . "\n<h1>", $body, 1);
+    echo page($post['title'] ?? $m[1], $body, $desc, 'article', $img);
     exit;
 }
 
@@ -212,6 +228,26 @@ if (preg_match('#^/(privacy|cookies)$#', $route, $m)) {
     $md = is_file($file) ? (string) file_get_contents($file) : 'Policy page missing.';
     $title = $m[1] === 'privacy' ? 'Privacy Policy' : 'Cookie Policy';
     echo page($title, '<article class="post policy">' . BlogMarkdown::render($md) . '</article>');
+    exit;
+}
+
+// ---------- sitemap.xml ----------
+if ($route === '/sitemap.xml') {
+    header('Content-Type: application/xml; charset=utf-8');
+    $urls = ['https://innovationlab.earth-turtle.com/',
+             'https://innovationlab.earth-turtle.com/about'];
+    foreach ($store->posts() as $post) {
+        $urls[] = 'https://innovationlab.earth-turtle.com/post/' . $post['slug'];
+    }
+    foreach ($store->tags() as $tag => $_) {
+        $urls[] = 'https://innovationlab.earth-turtle.com/tag/' . $tag;
+    }
+    echo '<?xml version="1.0" encoding="UTF-8"?>' . "\n";
+    echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' . "\n";
+    foreach ($urls as $u) {
+        echo "  <url><loc>{$u}</loc></url>\n";
+    }
+    echo '</urlset>';
     exit;
 }
 
