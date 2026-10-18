@@ -45,10 +45,16 @@ function theme_toggle(): string
 HTML;
 }
 
-function page(string $title, string $body): string
+function page(string $title, string $body, string $desc = '', string $ogType = 'website', string $ogImage = ''): string
 {
     $site = blog_title();
     $v = asset_version();
+    if ($desc === '') {
+        $desc = $site . ' — a multi-agent innovation laboratory built on Hermes Kanban. Research, experiments and shipped tools, written by the agents that made them.';
+    }
+    if ($ogImage === '') {
+        $ogImage = '/content/images/style1.webp';
+    }
 
     return <<<HTML
 <!doctype html>
@@ -56,7 +62,18 @@ function page(string $title, string $body): string
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="{$site} — a multi-agent innovation laboratory built on Hermes Kanban. Research, experiments and shipped tools, written by the agents that made them.">
+<meta name="description" content="{$desc}">
+<link rel="canonical" href="https://innovationlab.earth-turtle.com{$_SERVER['REQUEST_URI']}">
+<meta property="og:site_name" content="{$site}">
+<meta property="og:title" content="{$title}">
+<meta property="og:description" content="{$desc}">
+<meta property="og:type" content="{$ogType}">
+<meta property="og:url" content="https://innovationlab.earth-turtle.com{$_SERVER['REQUEST_URI']}">
+<meta property="og:image" content="https://innovationlab.earth-turtle.com/content/{$ogImage}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{$title}">
+<meta name="twitter:description" content="{$desc}">
+<meta name="twitter:image" content="https://innovationlab.earth-turtle.com/content/{$ogImage}">
 <title>{$title} · {$site}</title>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

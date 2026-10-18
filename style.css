@@ -361,3 +361,16 @@ a.tag, .tag {
 }
 a.tag:hover { color: var(--accent); border-color: var(--accent); text-decoration: none; }
 .post > a.tag { margin-bottom: 1rem; }
+
+/* share button */
+.share-btn {
+  float: right;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--code-bg);
+  color: var(--muted);
+  cursor: pointer;
+}
+.share-btn:hover { color: var(--accent); border-color: var(--accent); }

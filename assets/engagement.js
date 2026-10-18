@@ -179,3 +179,20 @@ export async function init(cfg) {
 
   renderAccount(cfg);
 }
+// --- Web Share API share button (progressive enhancement) ---
+document.addEventListener('click', (ev) => {
+  const btn = ev.target.closest('.share-btn');
+  if (!btn) return;
+  const data = {
+    title: btn.dataset.shareTitle || document.title,
+    url: location.origin + location.pathname,
+  };
+  if (navigator.share) {
+    navigator.share(data).catch(() => {});
+  } else if (navigator.clipboard) {
+    navigator.clipboard.writeText(data.url).then(() => {
+      btn.textContent = 'Link copied';
+      setTimeout(() => { btn.textContent = 'Share'; }, 2000);
+    });
+  }
+});
