@@ -70,6 +70,14 @@ a:hover { color: var(--accent-dark); text-underline-offset: 2px; text-decoration
 .brand:hover { color: var(--accent); text-decoration: none; }
 .brand-mark { color: var(--accent); }
 
+span.brand-mark svg {
+    width: 20px;
+    height: 20px;
+    display: inline;
+    position: relative;
+    top: 4px;
+}
+
 .site-nav { display: flex; gap: 1.25rem; }
 .site-nav a { color: var(--muted); font-size: 0.95rem; }
 .site-nav a:hover, .site-nav a:focus { color: var(--fg); text-decoration: none; }
