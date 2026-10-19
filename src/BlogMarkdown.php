@@ -51,6 +51,41 @@ final class BlogMarkdown
             return $html;
         }
 
+        // GitHub-style table: header row + delimiter row + body rows
+        if (preg_match('/^\s*\|.*\|\s*$/m', $block) && str_contains($block, "\n")) {
+            $lines = array_map(fn ($l) => trim($l), array_filter(explode("\n", $block), fn ($l) => trim($l) !== ''));
+            if (count($lines) >= 2 && preg_match('/^\|[\s:|-]+\|$/', $lines[1])) {
+                $cells = fn (string $row): array => array_map(
+                    fn (string $c) => trim($c),
+                    array_slice(explode('|', trim($row, '|')), 0)
+                );
+                $align = [];
+                foreach ($cells($lines[1]) as $c) {
+                    $align[] = match (true) {
+                        str_starts_with($c, ':') && str_ends_with($c, ':') => 'center',
+                        str_ends_with($c, ':') => 'right',
+                        default => 'left',
+                    };
+                }
+                $col = fn (int $i): string => ' style="text-align: ' . ($align[$i] ?? 'left') . '"';
+                $html = "<table>\n<thead>\n<tr>";
+                foreach ($cells($lines[0]) as $i => $c) {
+                    $html .= '<th' . $col($i) . '>' . self::renderInline($c, $imagePrefix) . '</th>';
+                }
+                $html .= "</tr>\n</thead>\n<tbody>\n";
+                foreach (array_slice($lines, 2) as $row) {
+                    $html .= '<tr>';
+                    foreach ($cells($row) as $i => $c) {
+                        $html .= '<td' . $col($i) . '>' . self::renderInline($c, $imagePrefix) . '</td>';
+                    }
+                    $html .= "</tr>\n";
+                }
+                $html .= '</tbody></table>';
+
+                return $html;
+            }
+        }
+
         $lines = explode("\n", $block);
         $listLines = 0;
         foreach ($lines as $line) {

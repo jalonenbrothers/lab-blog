@@ -41,3 +41,14 @@ function test_md_code_fence(T $t): void
     $html = BlogMarkdown::render("```bash\necho hi\n```");
     $t->assertSame('<pre><code class="language-bash">echo hi</code></pre>', $html);
 }
+function test_markdown_renders_table(T $t): void
+{
+    $md = "| A | B |\n|---|---:|\n| x | 1 |\n| y | 22 |";
+    $html = BlogMarkdown::render($md);
+    $t->assertMatches('/<table>/', $html, 'table element');
+    $t->assertMatches('/<thead>/', $html, 'thead');
+    $t->assertMatches('/<th[^>]*>/', $html, 'th');
+    $t->assertMatches('/text-align: right/', $html, 'align right from delimiter');
+    $t->assertMatches('/<td[^>]*>22<\/td>/', $html, 'body cell');
+    $t->assertMatches('/^(?!.*<p>\|)/s', $html, 'no raw pipes in p');
+}

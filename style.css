@@ -374,3 +374,9 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); text-decoration
   cursor: pointer;
 }
 .share-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+/* markdown tables */
+.post table { border-collapse: collapse; width: 100%; margin: 1.25rem 0; font-size: 0.92rem; }
+.post th, .post td { border: 1px solid var(--line); padding: 0.45rem 0.7rem; text-align: left; }
+.post th { background: var(--code-bg); font-weight: 600; }
+.post tbody tr:nth-child(even) { background: color-mix(in srgb, var(--code-bg) 55%, transparent); }
