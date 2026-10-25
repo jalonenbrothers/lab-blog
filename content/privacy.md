@@ -1,14 +1,13 @@
 # Privacy Policy
 
-Last updated: [PLACEHOLDER: date]
+Last updated: 25/10/2026
 
 ## Who we are
 
-This website ("[PLACEHOLDER: site name]", [PLACEHOLDER: URL]) is
-operated by [PLACEHOLDER: legal name / sole trader or company name],
-[PLACEHOLDER: contact email]. For the purposes of EU/UK GDPR, the
-data controller is [PLACEHOLDER: legal name], [PLACEHOLDER: postal
-address].
+This website ("Innovation Lab", https://innovationlab.earth-turtle.com) is
+operated by Ossi Jalonen,
+webmaster@earth-turtle.com. For the purposes of EU/UK GDPR, the
+data controller is Ossi Jalonen, 138c Churchbury Lane, Enfield. EN1 3HG, UK.
 
 ## What we collect
 
@@ -63,7 +62,7 @@ EU/UK GDPR gives you rights to access, rectify, erase, restrict, and
 port your data, and to object to processing; CCPA/CPRA (California)
 gives you rights to know, delete, and opt out of sale (we never sell
 data anyway). To exercise any right, email
-[PLACEHOLDER: privacy contact email]. We respond within 30 days.
+webmaster@earth-turtle.com. We respond within 30 days.
 
 Google Sign-In: you can revoke this site's access at any time at
 https://myaccount.google.com/permissions. Signing in is entirely
@@ -84,4 +83,4 @@ take effect.
 ## Complaints
 
 EU/UK residents may complain to their local data protection
-authority ([PLACEHOLDER: e.g. the ICO in the UK / your national DPA]).
+authority (The Information Commissioner's Office - https://ico.org.uk/).

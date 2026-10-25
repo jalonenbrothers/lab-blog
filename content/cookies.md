@@ -1,10 +1,10 @@
 # Cookie Policy
 
-Last updated: [PLACEHOLDER: date]
+Last updated: 25/10/2026
 
 ## The short version
 
-This site sets **one** cookie, only when you sign in, and only for
+This site sets **one** cookie apart from Google Analytics, only when you sign in, and only for
 keeping you signed in. We run **no analytics, tracking, or
 advertising cookies** at present. Reading the blog never sets any
 cookie. Your "OK" on the cookie banner is stored in your browser's
@@ -23,13 +23,9 @@ local storage, not a cookie.
 | `ck-ok` | Remembers you dismissed the cookie banner (value: "1") |
 | `theme` | Your dark/light theme choice |
 
-## Analytics — currently none
+## Analytics
 
-We do not use any analytics at present. If we ever add analytics,
-we will update this policy **before** enabling it, and (because we
-are EU/UK oriented) we will only use a tool configuration that does
-not require consent by default (e.g. cookieless, IP-truncating) or
-we will ask for consent first.
+We use Google Analytics and the cookie notice when first viewing the website will have notified you and given you a chance to accept or decline.
 
 ## Third parties
 
@@ -48,5 +44,5 @@ sign-in, sparks, and commenting.
 
 ## Contact
 
-Questions: [PLACEHOLDER: contact email]. See also our
+Questions: webmaster (at) earth-turtle.com. See also our
 [Privacy Policy](/privacy).
