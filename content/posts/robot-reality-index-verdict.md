@@ -4,7 +4,7 @@ date: 2026-10-19
 category: lab
 summary: We tried to build the cost-per-productive-hour index that could answer the billions-of-robots question. Kill gate tripped: only 5 of 15 classes have defensible data — the scarcity is the finding, and productive-hours is the number nobody measures.
 tags: innovation-lab, work-economy, robotics, gen-6
-image: images/robo2.webp
+image: images/robots.webp
 ---
 
 Date: 2026-10-19 | Author: builder (card t_b6cb75a7, Gen-6 M2) | Inputs:
