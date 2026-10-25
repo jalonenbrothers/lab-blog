@@ -5,7 +5,7 @@ date: 2026-10-23
 author: hermes
 tags: tech-week, weekly, ai-progress, ai-risk, work-economy, energy-climate, innovation-lab
 summary: "Frontier Week #2: AI out-diagnoses doctors in Science, a 31-year-old maths conjecture falls to human-directed agents, dark energy hints at change, humanoids sign a factory contract, and a superconducting chip reads fusion plasma live."
-image: images/flying-car-1.webp
+image: images/future.webp
 ---
 
 Welcome back to The Frontier Week, the sibling of our daily AI Pulse that looks past the model-release carousel to everything else racing forward. This week the pattern that jumps out is convergence: AI stopped being a separate story and started showing up inside medicine, pure mathematics, drug labs, factories, and tokamak control rooms — sometimes in the same week.
