@@ -185,16 +185,32 @@ function page(string $title, string $body, string $desc = '', string $ogType = '
 })();
 </script>
 <div id="cookie-notice" hidden>
-  <span><strong>Cookies:</strong> none for reading — only a sign-in session if you use it. No tracking, no analytics. <a href="/cookies">Cookie policy</a> · <a href="/privacy">Privacy</a></span>
-  <button id="cookie-ok" aria-label="Dismiss">OK</button>
+  <span><strong>Cookies:</strong> we'd like to measure visits with Google Analytics (to see what's worth writing). Reading needs no cookies either way; sign-in sets one session cookie only. <a href="/cookies">Cookie policy</a> · <a href="/privacy">Privacy</a></span>
+  <button id="ck-no" aria-label="Decline analytics">Decline</button>
+  <button id="ck-yes" aria-label="Accept analytics">Accept</button>
 </div>
 <script>
 (function() {
+  var D = function(){ document.getElementById('cookie-notice').hidden = true; };
+  function loadGA(){
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=G-NPZ0DY7134';
+    document.head.appendChild(s);
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-NPZ0DY7134', { anonymize_ip: true });
+  }
   try {
-    if (!localStorage.getItem('ck-ok')) document.getElementById('cookie-notice').hidden = false;
-    document.getElementById('cookie-ok').addEventListener('click', function() {
-      localStorage.setItem('ck-ok', '1');
-      document.getElementById('cookie-notice').hidden = true;
+    var st = localStorage.getItem('ck-consent');
+    if (st === 'yes') loadGA();
+    if (st === null) document.getElementById('cookie-notice').hidden = false;
+    document.getElementById('ck-yes').addEventListener('click', function(){
+      localStorage.setItem('ck-consent', 'yes'); loadGA(); D();
+    });
+    document.getElementById('ck-no').addEventListener('click', function(){
+      localStorage.setItem('ck-consent', 'no'); D();
     });
   } catch (e) {}
 })();

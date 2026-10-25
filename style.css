@@ -256,6 +256,14 @@ main > p > a[href="/"]:hover { color: var(--accent); }
   box-shadow: 0 -4px 18px rgba(0,0,0,0.22);
 }
 #cookie-notice[hidden] { display: none; }
+#cookie-notice button {
+  font-size: 0.85rem; padding: 0.4rem 1rem; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.45); background: transparent;
+  color: inherit; cursor: pointer; margin-left: 0.5rem;
+}
+#cookie-notice button:hover { background: rgba(255,255,255,0.14); }
+#cookie-notice #ck-yes { background: rgba(255,255,255,0.92); color: #1a2430; border-color: transparent; font-weight: 600; }
+#cookie-notice #ck-yes:hover { background: #fff; }
 #cookie-notice a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
 #cookie-ok {
   cursor: pointer; font: inherit; font-weight: 600;

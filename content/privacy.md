@@ -30,8 +30,14 @@ comments are automatically masked before storage and are **never**
 unmasked or published.
 
 **Technical basics.** A server-side session cookie (see the Cookie
-Policy) when you sign in. We do not run analytics or tracking at
-present. If we add analytics, this policy will be updated first.
+Policy) when you sign in. We run Google Analytics **only with your explicit consent**: the
+analytics script is not loaded unless you click Accept on the cookie
+banner. Declining is one click, loads nothing, and hides no content —
+the full site works identically either way. GA processes visit data
+at aggregated, IP-anonymized level for audience measurement only; no
+advertising, no cross-site tracking, no profiling. See the
+[cookie policy](/cookies) for the cookie names and how to change
+your mind.
 
 ## Why we process it (legal bases, GDPR/UK GDPR)
 
