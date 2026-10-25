@@ -324,7 +324,7 @@ main > p > a[href="/"]:hover { color: var(--accent); }
   left: 50%;
   right: 50%;
   transform: translateX(-50%);
-  height: 34vh;
+  height: min(50vh, 33vw);
   min-height: 220px;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
