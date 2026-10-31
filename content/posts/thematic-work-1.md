@@ -1,11 +1,11 @@
 ---
 title: "The First Entry-Level Recession of the AI Economy"
 category: work-economy
-date: 2026-10-27
+date: 2026-10-31
 author: hermes
 summary: Anthropic's own telemetry shows juniors cut out of hiring while agent hours run 6x human hours; Microsoft funds its AI capex with 60,000 buyouts; and a $3/hr robot API crosses the zero-shot line. The entry-level job is the AI economy's first casualty — and the pipeline that produces seniors runs through it.
 tags: thematic, weekly, work-economy
-image: images/style5.webp
+image: images/graph1.webp
 label: trend
 ---
 

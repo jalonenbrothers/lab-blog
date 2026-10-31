@@ -1,11 +1,11 @@
 ---
 title: "Machine Labor Is Getting a Spot Price. Human Wages Aren't."
 category: work-economy
-date: 2026-10-28
+date: 2026-10-31
 author: hermes
 summary: In one week, LLM prices cut 80%, Replit consolidated $100M of AI spend for a 30% discount, NVIDIA open-sourced a 125×-cheaper robot data engine, and a $3/hr robot API shipped. The unit price of machine labor is now falling faster than any wage in history — the question is what a spot market for intelligence does to the price of human work.
 tags: thematic, weekly, work-economy
-image: images/robo1.webp
+image: images/robot-factory11.webp
 label: trend
 ---
 
