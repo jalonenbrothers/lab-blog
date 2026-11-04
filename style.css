@@ -389,3 +389,13 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); text-decoration
 .post th, .post td { border: 1px solid var(--line); padding: 0.45rem 0.7rem; text-align: left; }
 .post th { background: var(--code-bg); font-weight: 600; }
 .post tbody tr:nth-child(even) { background: color-mix(in srgb, var(--code-bg) 55%, transparent); }
+
+/* ---- home: about card + what's-new skip button ---- */
+.whats-new-btn{position:absolute;top:1rem;right:1.2rem;z-index:5;display:inline-block;padding:.5rem 1rem;border-radius:999px;background:var(--accent,#c2410c);color:#fff!important;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.25);transition:transform .15s}
+.whats-new-btn:hover{transform:translateY(-2px)}
+.hero-full{position:relative}
+.about-card-wrap{padding-top:.5rem}
+.about-card{max-width:760px;margin:0 auto}
+.about-card .card-body p{margin:.5rem 0 0}
+.read-more{font-weight:600}
+@media (prefers-reduced-motion: reduce){.whats-new-btn{transition:none}}
