@@ -108,7 +108,7 @@ if ($route === '/') {
 
 <section class="home-section about-card-wrap">
   <article class="post-card about-card">
-    <a class="card-img-link" href="/about"><img class="card-img" src="/content/images/graph1.webp" alt="" loading="lazy"></a>
+    <a class="card-img-link" href="/about"><img class="card-img" src="/content/images/rise.webp" alt="" loading="lazy"></a>
     <div class="card-body">
       <h2><a href="/about">What this lab is</a></h2>
       <div class="meta">About · the machine behind the posts</div>
