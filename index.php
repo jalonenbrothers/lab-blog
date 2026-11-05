@@ -60,6 +60,17 @@ if (preg_match('#^/(style\.css|favicon\.ico)$#', $route, $m)) {
     }
 }
 
+// static assets: /assets/<name> (css/js, basename only — no traversal)
+if (preg_match('#^/assets/([A-Za-z0-9._-]+)$#', $route, $m)) {
+    $file = __DIR__ . '/assets/' . $m[1];
+    if (is_file($file)) {
+        header('Content-Type: ' . (str_ends_with($m[1], '.css') ? 'text/css' : 'application/javascript'));
+        header('Cache-Control: public, max-age=604800');
+        readfile($file);
+        exit;
+    }
+}
+
 // images: /content/images/<name>
 if (preg_match('#^/content/(images/.+)$#', $route, $m)) {
     $path = $store->imagePath($m[1]);

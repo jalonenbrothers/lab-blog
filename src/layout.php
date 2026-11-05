@@ -95,6 +95,7 @@ function page(string $title, string $body, string $desc = '', string $ogType = '
 </script>
 </head>
 <body>
+<canvas id="ridges" aria-hidden="true"></canvas>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header">
   <div class="header-inner">
@@ -219,6 +220,7 @@ function page(string $title, string $body, string $desc = '', string $ogType = '
   import { init } from '/assets/engagement.js?v={$v}';
   init({ googleClientId: '682402449109-78u28dssa9lvr5j9puquh29er07tuc31.apps.googleusercontent.com' });
 </script>
+<script src="/assets/ridgeline.js?v={$v}" defer></script>
 </body>
 </html>
 HTML;
