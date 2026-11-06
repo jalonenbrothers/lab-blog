@@ -400,9 +400,20 @@ a.tag:hover { color: var(--accent); border-color: var(--accent); text-decoration
 .read-more{font-weight:600}
 @media (prefers-reduced-motion: reduce){.whats-new-btn{transition:none}}
 
-/* ---- ridgeline animated background ---- */
+/* ---- ridgeline animated background (theme-aware) ---- */
 #ridges{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
-html{background:#060a12}
-html:not([data-theme="dark"]) #ridges{opacity:.18}
-html:not([data-theme="dark"]) body{background:transparent}
-[data-theme="dark"] body{background:transparent}
+html{background:var(--bg)}
+body{background:transparent}
+/* ridgeline palette as custom properties — canvas reads these live */
+:root{
+  --ridge-bg:#060a12;
+  --ridge-line:#78c8e6;
+  --ridge-glow:#5a8cff;
+  --ridge-haze-a:0.05;
+}
+html:not([data-theme="dark"]){
+  --ridge-bg:#f4f1ea;
+  --ridge-line:#9fc3d8;
+  --ridge-glow:#b8d4ea;
+  --ridge-haze-a:0.10;
+}
