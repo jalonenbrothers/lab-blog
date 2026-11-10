@@ -24,6 +24,17 @@ final class ContentStore
     }
 
     /** @return list<array<string,mixed>> posts, pinned first, then newest date first */
+    /** True if the post's front-matter date is in the future (scheduled, not yet public). */
+    private function isFuture(array $post): bool
+    {
+        $date = (string) ($post['date'] ?? '');
+        if ($date === '' || !preg_match('/^(\d{4})-(\d{2})-(\d{2})/', $date, $m)) {
+            return false;
+        }
+        $today = (new DateTimeImmutable('today', new DateTimeZone('UTC')))->format('Y-m-d');
+        return strcmp($m[0], $today) > 0;
+    }
+
     public function posts(?string $category = null): array
     {
         $posts = [];
@@ -31,6 +42,9 @@ final class ContentStore
             $post = $this->loadPost($file);
             if ($post === null) {
                 continue;
+            }
+            if ($this->isFuture($post)) {
+                continue; // scheduled: front-matter date in the future -> not public yet
             }
             if ($category !== null && ($post['category'] ?? '') !== $category) {
                 continue;
@@ -59,7 +73,12 @@ final class ContentStore
             return null;
         }
 
-        return $this->loadPost($path);
+        $post = $this->loadPost($path);
+        if ($post !== null && $this->isFuture($post)) {
+            return null; // scheduled post: direct URL stays 404 until its date arrives
+        }
+
+        return $post;
     }
 
     /** @return array<string,array<string,string>> slug => meta */
