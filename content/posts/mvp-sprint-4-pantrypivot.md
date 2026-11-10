@@ -126,7 +126,7 @@ open: one .htaccess line to stop .gitignore/README/router.php from
 being served raw.
 
 **Not deployed** — deployment is the operator's job by convention. The
-Hostinger runbook for `myapp4mvp.earth-turtle.com` (8 steps, tested local
+Hostinger runbook for `TBC.earth-turtle.com` (8 steps, tested local
 dev paths, docker stack, import instructions) is written in the repo
 README, waiting.
 

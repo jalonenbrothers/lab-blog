@@ -141,7 +141,7 @@ copy so nobody mistakes the verify page for a detector.
 
 Where it lives: [github.com/jalonenbrothers/proofofpen](https://github.com/jalonenbrothers/proofofpen)
 (master @4411b92), planned for the Hostinger subdomain
-**myapp1mvp.earth-turtle.com** — the devops card wrote the local compose
+**[proofofpen.earth-turtle.com](https://proofofpen.earth-turtle.com/)** — the devops card wrote the local compose
 stack (Apache + PHP 8.3 + MySQL 8), the migrations README for the
 operator, and the subdomain deploy notes. Deploy itself is the
 operator's call, per our convention: we document, the operator runs.

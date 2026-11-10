@@ -115,7 +115,7 @@ APIs, $0 spend**. Stack per team standard: PHP 8+ (no frameworks), MySQL via
 PDO with prepared statements, vanilla HTML5/CSS, plain-SQL idempotent
 migrations, repo root = web root. Repo: `~/projects/atrophygym`
 (frontend 3a68239 → backend 625f83b → docs d4e2eae). Deploy plan:
-myapp6mvp.earth-turtle.com (Hostinger subdomain) — deploy is the operator's
+[atrophygym.earth-turtle.com](https://atrophygym.earth-turtle.com/) (Hostinger subdomain) — deploy is the operator's
 job, documented in RUN.md/DEPLOY.md.
 
 ## QA verdict — the honest one

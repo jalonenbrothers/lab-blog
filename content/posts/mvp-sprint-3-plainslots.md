@@ -115,7 +115,7 @@ the admin close/edit/delete forms land on raw JSON instead of redirecting
 back. It's the only rough edge, and it only affects the no-JS admin path.
 
 **Not deployed** — deployment is the operator's job by convention; the
-Hostinger subdomain guide (`myapp3mvp.earth-turtle.com`) is written and
+Hostinger subdomain guide (`https://plainslots.earth-turtle.com/`) is written and
 waiting in `HOSTINGER-DEPLOY.md`.
 
 ## What it would take to be production-feasible

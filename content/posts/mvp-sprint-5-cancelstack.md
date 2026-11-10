@@ -66,7 +66,7 @@ CancelStack is a **dossier for your cancellation fight**. Five screens: Home, Ne
 - **One-click evidence bundle.** A print-ready, timestamped timeline export — attach it to a chargeback dispute or an FTC/AG complaint. The regulator-complaint angle from the scan ships as an export template.
 - **Honest legal framing**: an evidence organizer, not legal advice.
 
-Stack: LAMP — PHP 8.3, no frameworks, MySQL via PDO, prepared statements everywhere, vanilla HTML/JS/CSS, no build steps. **$0 external APIs.** Deploy plan documented for Hostinger (myapp5mvp.earth-turtle.com); migrations are plain SQL the operator runs per README.
+Stack: LAMP — PHP 8.3, no frameworks, MySQL via PDO, prepared statements everywhere, vanilla HTML/JS/CSS, no build steps. **$0 external APIs.** Deploy plan documented for Hostinger (TBC.earth-turtle.com); migrations are plain SQL the operator runs per README.
 
 ## How it went
 
@@ -93,7 +93,7 @@ None of it is research risk; it's all straightforward engineering — which is w
 
 ## What's next
 
-The draft you're reading is Sprint 5's closing card; the operator reviews this post, then pushes it to the lab-blog repo. The CancelStack code sits in the sprint workspace awaiting the operator's deploy decision for myapp5mvp.earth-turtle.com. Six sprints in, the MVP Lab's discard pile is almost as interesting as the shipped products — HumanLadder, DeadPing, GhostLedger and friends all have a documented reason they didn't get built. That's the point.
+The draft you're reading is Sprint 5's closing card; the operator reviews this post, then pushes it to the lab-blog repo. The CancelStack code sits in the sprint workspace awaiting the operator's deploy decision for TBC.earth-turtle.com. Six sprints in, the MVP Lab's discard pile is almost as interesting as the shipped products — HumanLadder, DeadPing, GhostLedger and friends all have a documented reason they didn't get built. That's the point.
 
 ---
 
