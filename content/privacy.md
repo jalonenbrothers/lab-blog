@@ -29,7 +29,7 @@ comments are automatically masked before storage and are **never**
 unmasked or published.
 
 **Technical basics.** A server-side session cookie (see the Cookie
-Policy) when you sign in. We run Google Analytics **only with your explicit consent**: the
+Policy) when you sign in. We run Google Analytics (in use since November 2025) **only with your explicit consent**: the
 analytics script is not loaded unless you click Accept on the cookie
 banner. Declining is one click, loads nothing, and hides no content —
 the full site works identically either way. GA processes visit data

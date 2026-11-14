@@ -25,7 +25,16 @@ local storage, not a cookie.
 
 ## Analytics
 
-We use Google Analytics and the cookie notice when first viewing the website will have notified you and given you a chance to accept or decline.
+We use Google Analytics (measurement ID `G-NPZ0DY7134`, in use since
+November 2025) for aggregate audience measurement. The cookie notice
+you saw on first visiting will have offered you an equal one-click
+choice: **Accept** loads the analytics script; **Decline** loads
+nothing and hides no content. With consent, Google sets its own
+cookies (`_ga*` family) under
+[Google's Privacy Policy](https://policies.google.com/technologies/partner-sites);
+we configure IP anonymization and no cross-site tracking or
+advertising. Changing your mind: clear this site's data in your
+browser and the notice returns.
 
 ## Third parties
 
