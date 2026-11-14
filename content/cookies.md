@@ -1,14 +1,16 @@
 # Cookie Policy
 
-Last updated: 25/10/2026
+Last updated: 14/11/2026
 
 ## The short version
 
-This site sets **one** cookie apart from Google Analytics, only when you sign in, and only for
-keeping you signed in. We run **no analytics, tracking, or
-advertising cookies** at present. Reading the blog never sets any
-cookie. Your "OK" on the cookie banner is stored in your browser's
-local storage, not a cookie.
+This site sets **one** cookie of its own, only when you sign in, and
+only for keeping you signed in. Reading the blog never sets any cookie
+of ours. **With your consent** (via the banner's Accept button),
+Google Analytics runs and Google may set its own measurement cookies —
+see the Analytics section below. Without consent, nothing loads and no
+analytics or advertising cookies are set. Your banner choice is
+stored in your browser's local storage, not a cookie.
 
 ## The cookie we set
 
