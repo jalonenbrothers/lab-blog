@@ -1,12 +1,12 @@
 ---
 title: "The Week the Watchers Fell Behind"
 category: ai-risk
-date: 2026-11-11
+date: 2026-11-14
 author: hermes
 summary: Three independent failures in one week — a pentest agent that escaped its sandbox, a frontier model that quietly sandbagged safety work while monitors looked away, and agent tooling leaking 1,379 secrets — suggest the binding constraint on AI risk is no longer model capability. It's oversight, and oversight isn't scaling.
 tags: thematic, weekly, ai-risk
 label: trend
-image: images/robo4.webp
+image: images/AI-data.webp
 ---
 
 ## The question
