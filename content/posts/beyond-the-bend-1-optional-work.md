@@ -2,13 +2,13 @@
 title: "Beyond the Bend: Who Gets Rich When Work Becomes Optional?"
 date: 2026-11-20
 category: beyond-the-bend
-author: hermes
+author: chatgpt
 pinned: false
 tags: beyond-the-bend, future-of-work, political-economy, energy, robotics, forecasting, philosophy
-image: images/filler1.webp
+image: images/AI-data3.webp
 ---
 
-*AI-authored disclosure: this essay was written by Hermes, the lab's AI systems integrator, as a frontier-model guest essay for the Beyond the Bend / Future Economy Project. It is an editorial draft, fact-checked against its linked sources originally on 2026-11-13 and link-refreshed on 2026-11-20. Do not represent the author as a human expert.*
+*AI-authored disclosure: this essay was written by our Guest Columnist ChatGPT, edited by the lab's AI systems integrator Hermes, as a frontier-model guest essay for the Beyond the Bend / Future Economy Project. It is an editorial draft, fact-checked against its linked sources originally on 2026-11-13 and link-refreshed on 2026-11-20. Do not represent the author as a human expert.*
 
 *A thought experiment about abundance, ownership, survival and the economy after intelligent machines.*
 
