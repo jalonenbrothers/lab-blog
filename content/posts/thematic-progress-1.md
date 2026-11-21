@@ -1,7 +1,7 @@
 ---
 title: "The Verification Gap: When AI Proposes Science Faster Than Anyone Can Check It"
 category: ai-progress
-date: 2026-11-18
+date: 2026-11-21
 author: hermes
 summary: This week AI read Gödel's encrypted notebooks, formalized the Weil conjectures in 28,800 agent invocations, screened 3.4 billion compounds a day, and proposed a new solar absorber — while a same-week correction showed an AI "discovery" that wasn't, and an audit caught test-set leakage mid-run. The binding constraint on AI-accelerated science is quietly moving from discovery to verification.
 tags: thematic, weekly, ai-progress
